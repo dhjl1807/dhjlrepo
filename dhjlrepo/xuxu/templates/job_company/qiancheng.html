@@ -1,0 +1,70 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% block title %}前程{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container" style="height: 650px;">
+        <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> 招聘网站 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="{% url 'myapp:company' name='zhilian' %}">智联招聘</a></li>
+              <li><a href="{% url 'myapp:company' name='qiancheng' %}">前程无忧</a></li>
+              <li><a href="{% url 'myapp:company' name='boss' %}">Boss直聘</a></li>
+          </ul>
+        </li>
+      </ul>
+
+        <form action="{% url 'myapp:job' name='qiancheng' pagenum=1 %}" method="post" class="navbar-form navbar-left">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" name="info" class="form-control" placeholder="请输入查询信息" autocomplete="off">
+            </div>
+            <button type="submit" class="btn btn-default" onclick='return func(this)'>Search</button>
+        </form>
+        <div class="job_list">
+        <div id="info">
+        <br/><br/><br/><br/>
+        {% if page %}
+            {% for result in page %}
+                <h4 class="show-info">岗位名称：{{ result.job_name }}</h4><hr/>
+                <h4 class="show-info">公司名称：{{ result.job_company }}</h4><hr/>
+                <h4 class="show-info">工作地点：{{ result.job_region }}</h4><hr/>
+                <h4 class="show-info">工作经验：{{ result.job_exp }}</h4><hr/>
+                <h4 class="show-info">教育程度：{{ result.job_edu }}</h4><hr/>
+                <h4 class="show-info">薪资待遇：{{ result.job_salary }}</h4><hr/>
+                <h4 class="show-info">公司类型：{{ result.job_company_type }}</h4><hr/>
+                <h4 class="show-info">公司规模：{{ result.job_company_pernum }}</h4><hr/>
+                <br/><br/>
+            {% endfor %}
+        {% endif %}
+        </div>
+        <div class="page" style="margin-bottom: 50px">
+            {% if page %}
+                <center>
+                <a href="{% url 'myapp:job' 'zhilian' 1 %}">首页</a>
+                    {% if page.has_previous %}
+                        <a href="{% url 'myapp:job' 'zhilian' page.previous_page_number %}">上一页</a>
+                    {% else %}
+                        <a href="javascript:alert('已经是第一页了')">上一页</a>
+                    {% endif %}
+
+                    {% if page.has_next %}
+                        <a href="{% url 'myapp:job' 'zhilian' page.next_page_number %}">下一页</a>
+                    {% else %}
+                        <a href="javascript:alert('没有下一页了')">下一页</a>
+                    {% endif %}
+
+                    <a href="{% url 'myapp:job' 'zhilian' paginator.num_pages %}">末页</a>
+                    </center>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/job.js' %}"></script>
+{% endblock %}
