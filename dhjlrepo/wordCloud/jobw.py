@@ -34,25 +34,22 @@ class sqlHelper(object):
 
 
 def create_wordcloud(table_name):
-    # sql = sqlHelper("10.12.152.89", "xuxu", "xuxu", "xuxu")
-    sql = sqlHelper("localhost", "root", "dong", "mydb")
-    datas: tuple = sql.getAll(table_name)  # 长度375
+    sql = sqlHelper("10.12.152.89", "xuxu", "xuxu", "xuxu")
+    datas: tuple = sql.getAll(table_name)
     print('开始加载文本')
     text = ''
     for data in datas:
 
-        # 8对应拉招聘公司的职位要求描述
-        if not data[1]:
+        # 9对应拉招聘公司的职位要求描述
+        if not data[8]:
             continue
         else:
-            text += data[1]
+            text += data[8]
 
     text = text.replace("'", "")
 
-    # ['[', 'redis', ',', ' ', 'SOA', ']'
     items = [i for i in jieba.cut(text)]  # jieba.cut(text) 将text的元素一个个切出返回列表
 
-    # [redis, SOA]
     text = " ".join(jieba.cut(text))
 
     d = path.dirname(__file__)
@@ -73,4 +70,4 @@ def create_wordcloud(table_name):
 
 
 if __name__ == '__main__':
-    create_wordcloud('zhilian_02_log')
+    create_wordcloud('job_info')
