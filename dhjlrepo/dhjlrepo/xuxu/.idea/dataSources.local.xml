@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="db.sqlite3" uuid="b36acc68-4bba-4c1a-8521-45680bcf5dd0">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <introspection-schemas>*:main</introspection-schemas>
+    </data-source>
+    <data-source name="xuxu@10.12.152.89" uuid="e65426af-0bef-4fbf-ad71-f95ab613fab4">
+      <database-info product="MySQL" version="5.7.26-0ubuntu0.18.10.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.47 ( Revision: fe1903b1ecb4a96a917f7ed3190d80c049b1de29 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <user-name>xuxu</user-name>
+      <introspection-schemas>*:xuxu</introspection-schemas>
+    </data-source>
+  </component>
+</project>

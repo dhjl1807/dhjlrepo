@@ -1,0 +1,50 @@
+{% extends 'base_main.html' %}
+{% block title %}Experience{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block  content %}
+    <div class="form-group">
+        <input type="text" name="info" style="width: 20%;float: left;" class="form-control" placeholder="请输入查询信息" autocomplete="off">
+        <button type="submit" class="btn btn-default" onclick="func()">Search</button>
+    </div>
+
+    <div id='mydiv' style="margin-right: 50px">
+        <iframe src="/echarts/yearsalary/西安/" id="iframe" width="100%" height="600" frameborder="0" name="myiframe" scrolling="no">
+        </iframe>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script>
+        function func(){
+            var value = $('input').val();
+            var lis = ['香港', '白山', '大连', '大同', '渭南', '东沙群岛', '台州', '东莞', '珠海', '永州', '洛阳', '常德', '石嘴山', '抚顺',
+                     '龙岩', '图木舒克', '濮阳', '万宁', '朝阳', '双鸭山', '常州', '凉山', '随州', '临高', '荆州', '株洲', '湖州', '乐东',
+                     '白城', '临夏', '济宁', '信阳', '乌海', '潍坊', '昭通', '来宾', '景德镇', '海西', '湛江', '汕尾', '佳木斯', '绥化',
+                     '蚌埠', '荆门', '九江', '兰州', '德阳', '鞍山', '五家渠', '石河子', '三沙', '黄冈', '广安', '广州', '达州', '文山',
+                     '吉安', '枣庄', '玉树', '安顺', '新余', '通化', '淮安', '塔城', '中山', '淮北', '深圳', '黔东南', '襄阳', '乐山',
+                     '双河市', '苏州', '菏泽', '庆阳', '咸宁', '六盘水', '黔南', '焦作', '茂名', '厦门', '运城', '定安', '营口', '青岛',
+                     '新乡', '安康', '柳州', '佛山', '百色', '吕梁', '攀枝花', '许昌', '海东', '天津', '梅州', '玉溪', '云浮', '莆田',
+                     '梧州', '南昌', '宝鸡', '开封', '红河', '贵阳', '盐城', '韶关', '日照', '鸡西', '伊犁', '遂宁', '铁门关', '邵阳',
+                     '清远', '鄂州', '威海', '广元', '徐州', '大理', '昌吉', '周口', '临汾', '安庆', '保亭', '杭州', '阿拉尔', '泸州',
+                     '忻州', '巴中', '阿勒泰', '遵义', '桂林', '北屯市', '齐齐哈尔', '南阳', '澄迈', '七台河', '通辽', '北京', '上海',
+                     '成都', '武汉', '西安', '南京', '重庆', '郑州', '长沙', '福州', '石家庄', '长春', '惠州', '济南', '廊坊', '合肥',
+                     '南宁', '昆明', '哈尔滨', '嘉兴'];
+            var index = $.inArray(value, lis)
+            {#alert(index)#}
+            if (index >= 0) {
+                var url = '/echarts/yearsalary/' + value + '/';
+                {#alert(url);#}
+                $('#iframe').attr('src', url);
+            }else{
+                alert('无此城市')
+            }
+
+        }
+    </script>
+{% endblock %}
+

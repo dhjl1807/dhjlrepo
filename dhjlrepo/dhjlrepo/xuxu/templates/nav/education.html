@@ -1,0 +1,33 @@
+{% extends 'base_main.html' %}
+{% block title %}Education{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block  content %}
+    <label>选择学历：</label>
+    <select style="height: 30px;width: 80px;border: none;outline: none;" onchange="func()">
+        <option value="本科">本科</option>
+        <option value="大专">专科</option>
+        <option value="硕士">硕士</option>
+        <option value="博士">博士</option>
+    </select>
+
+    <div id='mydiv' style="margin-right: 50px">
+        <iframe src="/echarts/edusalary/本科/" id="iframe" width="100%" height="600" frameborder="0" name="myiframe" scrolling="no">
+        </iframe>
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script>
+        function func(){
+            var value = $('select').val();
+            var url = '/echarts/edusalary/' + value + '/';
+            {#alert(url);#}
+            // 替换url
+            $('#iframe').attr('src', url);
+        }
+    </script>
+{% endblock %}

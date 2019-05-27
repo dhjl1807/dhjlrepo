@@ -1,0 +1,48 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% block title %}WordCloud{% endblock %}
+
+
+{% block css %}
+    <style>
+        img {
+            display: inline-block;
+            margin: -1px;
+        }
+    </style>
+{% endblock %}
+
+
+{% block  content %}
+    <label>选择网站：</label>
+    <select name='sel' style="height: 30px;width: 80px;border: none;outline: none;" onchange="fun(this)">
+        <option value="综合展示">综合展示</option>
+        <option value="智联招聘">智联招聘</option>
+        <option value="Boss直聘">Boss直聘</option>
+        <option value="前程无忧">前程无忧</option>
+    </select>
+
+
+    <div id="mydiv" style="text-align: center">
+        <div style="font-family: 'Microsoft YaHei UI'; font-size: 20px; text-align: center"><span id="sp"></span>Python岗位相关词云图
+        </div>
+        <hr>
+        <img src="/static/images/综合展示.png" title="Python词云图" style="width: 50%;height: 50%;">
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    <script>
+        function fun(sel) {
+            var value = $('select').val();
+            $.ajax('/echarts/wordcloud/' + value + '/', {
+                success: function (data) {
+                    $('img').attr('src', data['url']);
+                    $('img').attr('alt', data['alt'])
+                    $('span#sp').html(data['title']);
+                }
+            })
+        }
+    </script>
+{% endblock %}

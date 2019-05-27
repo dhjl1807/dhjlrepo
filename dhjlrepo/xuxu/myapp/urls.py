@@ -15,3 +15,4 @@ urlpatterns = [
     path(r'company/<name>/', to_company, name='company'),
     path(r'job/<name>/<pagenum>/', find_jobs, name='job')
 ]
+

@@ -80,11 +80,11 @@ WSGI_APPLICATION = 'SDAE.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'xuxu',
+        'NAME': 'xmdb',
         'PORT': 3306,
-        'HOST': '10.12.152.89',
-        'USER': 'xuxu',
-        'PASSWORD': 'xuxu'
+        'HOST': 'localhost',
+        'USER': 'root',
+        'PASSWORD': 'dong'
     }
 }
 

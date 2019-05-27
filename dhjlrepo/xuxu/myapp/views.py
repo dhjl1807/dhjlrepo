@@ -1,5 +1,3 @@
-import re
-
 import pymysql
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
@@ -11,14 +9,14 @@ from myapp.forms import UserForm
 from libs.cache import get_code
 
 
-conn = pymysql.Connect(host='10.12.152.89',
+conn = pymysql.Connect(host='localhost',
                        port=3306,
-                       user='xuxu',
-                       password='xuxu',
-                       database='xuxu')
+                       user='root',
+                       password='dong',
+                       database='xmdb')
 
 
-def go_home(request): # 跳转至首页,仅能注册登录
+def go_home(request):  # 跳转至首页,仅能注册登录
     return render(request, 'base_home.html')
 
 

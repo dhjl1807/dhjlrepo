@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Sign in{% endblock %}
+
+{% block css %}
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+	<!-- Modernizr JS -->
+	<script src="{% static 'js/reglog/modernizr-2.6.2.min.js' %}"></script>
+{% block content %}
+<div class="body no-js">
+	<div class="style-3" style="height: 750px">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-md-push-4">
+                    <!-- Start Sign In Form -->
+					<form action="{% url 'myapp:regist' %}" method="post" class="fh5co-form animate-box" data-animate-effect="fadeInRight" style="margin-top: 5em;">
+                        {% csrf_token %}
+						<h2>Sign Up</h2>
+						<div class="form-group">
+							<label for="name" class="sr-only">Name</label>
+                            <input type="text" class="form-control" id="name" name="username" placeholder="Name" autocomplete="off"><span class="text-danger">
+						</div>
+						<div class="form-group">
+							<label for="password" class="sr-only">Password</label>
+							<input type="password" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off">
+						</div>
+						<div class="form-group">
+							<label for="re-password" class="sr-only">Re-type Password</label>
+							<input type="password" class="form-control" id="re-password" placeholder="Re-type Password" autocomplete="off">
+						</div>
+                        <div class="form-group">
+							<label for="tel" class="sr-only">Telephone</label>
+							<input type="text" class="form-control" id="phonenum" name="telephone" placeholder="Telephone" autocomplete="off">
+						</div>
+                        <div class="form-group">
+							<label for="code" class="sr-only">验证码</label>
+							<input type="text" class="form-control" id="IdCode" name="code" placeholder="Identifying Code" autocomplete="off">
+                            <button type="button" onclick="getCode(this)" class="btn btn-info" style="margin-top: 4px">验证码</button>
+						</div>
+						<div class="form-group">
+							<p>Already registered? <a href="{% url 'myapp:login' %}">Sign In</a></p>
+						</div>
+						<div class="form-group">
+							<input type="submit" value="Sign Up" class="btn btn-primary">
+						</div>
+					</form>
+
+					<!-- END Sign In Form -->
+				</div>
+                <div class="danger col-md-8 col-md-push-4" style="float: left; margin-top: 15em ">
+                    {{ errors }}
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block js %}
+    <!-- jQuery -->
+	<script src="{% static 'js/reglog/jquery.min.js' %}"></script>
+	<!-- Bootstrap -->
+	<script src="{% static 'js/reglog/bootstrap.min.js' %}"></script>
+	<!-- Placeholder -->
+	<script src="{% static 'js/reglog/jquery.placeholder.min.js' %}"></script>
+	<!-- Waypoints -->
+	<script src="{% static 'js/reglog/jquery.waypoints.min.js' %}"></script>
+	<!-- Main JS -->
+	<script src="{% static 'js/reglog/main.js' %}"></script>
+    <!-- smscheck -->
+    <script src="{% static 'js/reglog/smscheck.js' %}"></script>
+{% endblock %}
