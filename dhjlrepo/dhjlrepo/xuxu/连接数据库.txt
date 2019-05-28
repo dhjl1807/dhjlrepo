@@ -1,0 +1,5 @@
+settings
+myapp/views
+base
+cache
+

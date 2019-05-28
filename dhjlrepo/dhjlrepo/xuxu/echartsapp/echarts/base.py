@@ -204,5 +204,5 @@ if __name__ == '__main__':
     # print(Job().get_data().head())
     # print(Job().citysalary_data('北京'))
     # print(Job().edusalary_data('硕士'))
-    # print(Job().yearsalary('北京'))
-    Job().sss()
+    print(Job().yearsalary('北京'))
+    # Job().sss()

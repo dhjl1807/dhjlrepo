@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from os import path
-import matplotlib.pyplot as plt
 import pymysql
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import redirect
+from django.http import JsonResponse
 from wordcloud import WordCloud
 import numpy as np
 from PIL import Image
@@ -50,15 +48,13 @@ def create_wordcloud(request, table_name='job_info'):
         table_name = 'job_info'
 
     exist_img = path.dirname(path.dirname(path.dirname(__file__)))
-    # pj = path.join(exist_img, 'static\images\{}.png'.format(img_table))
-    # print(pj)
     esixted_img = path.exists(path.join(exist_img, 'static\images\{}.png'.format(img_table)))
     # print(esixted_img)
     if esixted_img:
-        print('词云图是否存在？', esixted_img)
+        print('词云图是否已存在？', esixted_img)
         pass
     else:
-        print('词云图是否存在？', esixted_img)
+        print('词云图是否已存在？', esixted_img)
         sql = sqlHelper("10.12.152.89", "xuxu", "xuxu", "xuxu")
         datas: tuple = sql.getAll(table_name)
         print('开始加载文本')
@@ -81,7 +77,6 @@ def create_wordcloud(request, table_name='job_info'):
                     text += data[1]
 
         text = text.replace("'", "")
-
         text = " ".join(jieba.cut(text))
 
         d = path.dirname(__file__)

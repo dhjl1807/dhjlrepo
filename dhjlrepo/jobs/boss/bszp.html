@@ -1,0 +1,209 @@
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+    <style type="text/css">
+        .sign-form .row-code {
+            width: 280px;
+            height: 60px;
+        }
+
+    </style>
+    <style>
+        * { margin:0; padding:0; }
+        html,body { height:100%; }
+        body { background-color:#EEF0F5; }
+        body,button { font-family: arial, verdana, helvetica,'PingFang SC','HanHei SC','STHeitiSC-Light', Microsoft Yahei,sans-serif; font-size: 14px; line-height: 24px; color: #414a60; -webkit-font-smoothing: antialiased;}
+        a { text-decoration:none; }
+        #wrap { position:relative; min-height:100%; }
+        .btn { display:inline-block; width:98px; height:32px; line-height:32px; border:1px #62D5C8 solid; color:#5dd5c8; text-align:center; margin-right:20px; }
+        .btn:hover { background-color:#fff; }
+        .error-content { position:absolute; width:644px; min-height:260px; top:50%; left:50%; margin-left:-322px; margin-top:-130px; background:url(https://www.zhipin.com/v2/web/boss/images/icon-page-error.png) right center no-repeat; }
+        .error-content h1 { font-size:30px; line-height:36px; padding-top:30px; }
+        .error-content h3 { padding:20px 0 18px; font-size:18px; font-weight: normal; }
+        .error-content h3.gray { color:#9fa3b0;}
+        .error-content p { color:#9fa3b0; max-width:300px; }
+        .error-content .btns { padding-top:30px; }
+
+        #footer { position:absolute; width:100%; bottom:10px; text-align:center; color:#bec3d1; }
+        @media (max-width: 760px) {
+            .error-content { top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0 auto; width: auto; background-position: center 30px; background-size: 200px auto; text-align: center; padding-top: 150px; }
+            .error-content h1 { font-size: 24px; }
+            .error-content h3 { font-size: 15px; padding: 10px 0 10px; }
+            .btns { white-space: nowrap; }
+            #footer { font-size: 12px; }
+        }
+
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="main">
+        <div class="error-content">
+            <div class="text" style="margin:50px 10px">
+                <h3 class="gray">您当前的 IP 地址存在异常访问行为～</h3>
+                <div class="sign-form">
+                    <div class="row-code" id="verrifyCode"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <p>&copy; copyright BOSS直聘  京ICP备14013441号-5</p>
+    </div>
+</div>
+<script type="text/javascript" src="https://static.zhipin.com/library/js/lib/jquery-1.12.2.min.js
+"></script>
+<script type="text/javascript">
+
+    function seriesLoadScripts(scripts,callback) {
+        if(typeof(scripts) != "object") var scripts = [scripts];
+        var HEAD = document.getElementsByTagName("head").item(0) || document.documentElement;
+        var s = new Array(), last = scripts.length - 1, recursiveLoad = function(i) {
+            s[i] = document.createElement("script");
+            s[i].setAttribute("type","text/javascript");
+            s[i].setAttribute("charset","UTF-8");
+            //s[i].setAttribute('crossorigin','anonymous');
+            s[i].onload = s[i].onreadystatechange = function() {
+                if(!/*@cc_on!@*/0 || this.readyState == "loaded" || this.readyState == "complete") {
+                    this.onload = this.onreadystatechange = null; this.parentNode.removeChild(this);
+                    if(i != last) recursiveLoad(i + 1); else if(typeof(callback) == "function") callback();
+                }
+            }
+            s[i].setAttribute("src",scripts[i]);
+            HEAD.appendChild(s[i]);
+        };
+        recursiveLoad(0);
+    };
+    var browser={
+        versions:function(){
+            var u = navigator.userAgent, app = navigator.appVersion;
+            return {
+                trident: u.indexOf('Trident') > -1, //IE内核
+                presto: u.indexOf('Presto') > -1, //opera内核
+                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                android: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, //android终端
+                iPhone: u.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
+                iPad: u.indexOf('iPad') > -1, //是否iPad
+                webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+                weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+                qq: u.match(/\sQQ/i) == " qq" //是否QQ
+            };
+        }(),
+        language:(navigator.browserLanguage || navigator.language).toLowerCase()
+    }
+
+    var VerrifyCode = window['VerrifyCode'] || (function () {
+
+        var __date = new Date(),
+            timestamp = __date.getFullYear() + "" + __date.getMonth() + "" + __date.getDay();
+
+        var pc = function (option, $wrap) {
+
+            seriesLoadScripts("https://g.alicdn.com/sd/ncpc/nc.js?t=" + timestamp, function() {
+                var nc_token = ["BOSS_PC", (new Date()).getTime(), Math.random().toString(16)].join(':');
+                var NC_Opt =
+                    {
+                        renderTo: '#verrifyCode',
+                        appkey: option.appkey || "FFFF0N00000000006DC1",
+                        scene: option.scene || "nc_login",
+                        token: nc_token,
+                        customWidth: $wrap.find(".row-code").width(),
+                        trans:{"position": "sign-sms"},
+                        elementID: ["sign-sms"],
+                        is_Opt: 0,
+                        language: "cn",
+                        isEnabled: true,
+                        timeout: 3000,
+                        times:5,
+                        apimap: { },
+                        callback: function (data) {
+                          /* 
+ *                            $.post('/verify/api/confirm.json', data ,function (result,status,xhr) {
+ *                                                             window.history.back();
+ *                                                                                             if("ok" == result) {
+ *                                                                                                                                 window.history.back();
+ *                                                                                                                                                                 }
+ *                                                                                                                                                                                             });
+ *                                                                                                                                                                                                                       */
+                          $.ajax({url:"/verify/api/confirm.json",type: "POST",ontentType: "application/x-www-form-urlencoded",data:data,success:function(result){
+                              if("ok" == result) {
+                                window.history.back();
+                              }
+                          },error: function ( xhr,status,error) { 
+                               if("parsererror" == status) {
+                                 window.history.back();
+                               }
+                         }}); 
+                       }
+                    }
+
+                setTimeout(function() {
+                    var nc = new noCaptcha(NC_Opt)
+                    nc.upLang('cn', {
+                        _startTEXT: "请按住滑块，拖动到最右边",
+                        _yesTEXT: "验证通过",
+                        _error300: "哎呀，出错了，点击<a href=\"javascript:__nc.reset()\">刷新</a>再来一次",
+                        _errorNetwork: "网络不给力，请<a href=\"javascript:__nc.reset()\">点击刷新</a>",
+                    })
+                    $.post('/verify/api/notify.json', {} ,function (result) {
+                        //do nothing
+                    });
+                }, 1)
+
+            });
+        }
+
+
+
+        var renderTo = function (option, wrap) {
+
+            var opt = option || {};
+            var $wrap = wrap || $(".sign-form:visible");
+
+            if (!option) {
+
+                opt.scene = $wrap.find("input[name=cscene]").val();
+                opt.appkey = $wrap.find("input[name=cappKey]").val();
+            }
+
+            pc(opt, $wrap);
+        }
+
+        var reset = function ($el) {
+
+            if (!$el || !$el.length) {
+
+                return false;
+            }
+
+            var $wrap = $el.parents(".sign-form").length ? $el.parents(".sign-form") : $el.parents("form");
+            $el.empty();
+
+            renderTo({
+                scene: $wrap.find("input[name=cscene]").val(),
+                appkey: $wrap.find("input[name=cappKey]").val()
+            }, $wrap);
+        }
+
+        var build = function () {
+
+            $(".sign-form .row-code").each(function () {
+
+                reset($(this));
+            });
+        }
+
+        build();
+
+        return {
+            build: build,
+            reset: reset
+        };
+    })();
+</script>
+</body>
+</html>
