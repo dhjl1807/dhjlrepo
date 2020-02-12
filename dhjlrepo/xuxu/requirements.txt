@@ -1,5 +1,5 @@
 aliyun-python-sdk-core==2.13.4
-Django==2.1.4
+Django==2.2.10
 example==0.1.0
 Jinja2==2.10.1
 jmespath==0.9.4
