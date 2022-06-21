@@ -5,7 +5,7 @@ Jinja2==2.10.1
 jmespath==0.9.4
 MarkupSafe==1.1.1
 mysqlclient==1.4.2.post1
-numpy==1.16.3
+numpy==1.22.0
 pandas==0.24.2
 prettytable==0.7.2
 pyecharts==1.1.0
